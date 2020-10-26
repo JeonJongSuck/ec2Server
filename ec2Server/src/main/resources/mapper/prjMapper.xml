@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="kr.toy.jjsPrj.mapper.PrjMapper">
+
 	<!-- 전체 내용 조회 -->
-	<select id="viewAll" resultType="kr.toy.jjsPrj.PrjVO">
+	<select id="viewAll" resultType="PrjVO">
 	  SELECT * FROM product
 	</select>
 	
+	<!-- Insert -->
+	<insert id="insertProdcut" parameterType="PrjVO">
+		INSERT INTO product
+		VALUES(#{name}, #{description}, #{price}, #{makeCompany}, #{distributeCompany})
+	</insert>
+	
+	<!-- Update -->
+	<update id="updateProduct" parameterType="PrjVO">
+		UPDATE product
+		SET name = #{name}
+		 	, description = #{description}
+		 	, price = #{price}
+		 	, makeCompany = #{makeCompany}
+		 	, distributeCompany = #{distributeCompany}
+		WHERE name = #{bName}
+	</update>
 </mapper>

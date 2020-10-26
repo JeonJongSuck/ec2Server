@@ -6,4 +6,8 @@ import kr.toy.jjsPrj.PrjVO;
 
 public interface PrjMapper {
 	public List<PrjVO> viewAll();
+	
+	public void insertProdcut(PrjVO vo);
+	
+	public void updateProduct(PrjVO vo);
 }

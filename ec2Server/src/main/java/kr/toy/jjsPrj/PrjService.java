@@ -16,4 +16,12 @@ public class PrjService {
 	public List<PrjVO> viewAll(){
 		return prjMapper.viewAll();
 	}
+	
+	public void insertProdcut(PrjVO vo){
+		prjMapper.insertProdcut(vo);
+	}
+	
+	public void updateProduct(PrjVO vo){
+		prjMapper.updateProduct(vo);
+	}
 }
