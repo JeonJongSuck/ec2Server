@@ -5,5 +5,4 @@
 	<typeAliases>
 		<typeAlias type="kr.toy.jjsPrj.PrjVO" alias="prjVO" />
 	</typeAliases>
-	
 </configuration>

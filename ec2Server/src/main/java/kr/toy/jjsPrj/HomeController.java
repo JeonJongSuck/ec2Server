@@ -32,28 +32,14 @@ public class HomeController {
 	public ModelAndView insert(@RequestBody PrjVO vo, Model model) {
 		ModelAndView mv = new ModelAndView("jsonView");
 		
-		System.out.println(vo.getbName());
-		System.out.println(vo.getName());
-		System.out.println(vo.getPrice());
-		System.out.println(vo.getDescription());
-		System.out.println(vo.getDistributeCompany());
-		System.out.println(vo.getMakeCompany());
-		
 		prjService.insertProdcut(vo);
-		
+
 		return mv;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ModelAndView update(@RequestBody PrjVO vo, Model model) {
 		ModelAndView mv = new ModelAndView("jsonView");
-		
-		System.out.println(vo.getbName());
-		System.out.println(vo.getName());
-		System.out.println(vo.getPrice());
-		System.out.println(vo.getDescription());
-		System.out.println(vo.getDistributeCompany());
-		System.out.println(vo.getMakeCompany());
 		
 		prjService.updateProduct(vo);
 		
