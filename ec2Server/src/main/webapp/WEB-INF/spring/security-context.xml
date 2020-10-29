@@ -16,7 +16,7 @@
  
         <!-- enable csrf protection -->
  
-        <csrf />
+		<csrf disabled="true"/> 
  
     </http>
  

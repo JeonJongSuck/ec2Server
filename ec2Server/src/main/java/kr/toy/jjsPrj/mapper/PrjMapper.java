@@ -10,4 +10,6 @@ public interface PrjMapper {
 	public void insertProdcut(PrjVO vo);
 	
 	public void updateProduct(PrjVO vo);
+	
+	public void deleteProduct(PrjVO vo);
 }

@@ -23,4 +23,10 @@
 		 	, distributeCompany = #{distributeCompany}
 		WHERE name = #{bName}
 	</update>
+	
+	<!-- Delete-->
+	<delete id="deleteProduct" parameterType="PrjVO">
+		DELETE FROM product
+		WHERE name = #{name}
+	</delete>
 </mapper>

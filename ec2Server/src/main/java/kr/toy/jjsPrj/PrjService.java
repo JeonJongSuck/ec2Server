@@ -2,7 +2,8 @@ package kr.toy.jjsPrj;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import kr.toy.jjsPrj.mapper.PrjMapper;
@@ -10,7 +11,7 @@ import kr.toy.jjsPrj.mapper.PrjMapper;
 @Service
 public class PrjService {
 
-	@Autowired
+	@Resource
 	private PrjMapper prjMapper;
 	
 	public List<PrjVO> viewAll(){
@@ -23,5 +24,9 @@ public class PrjService {
 	
 	public void updateProduct(PrjVO vo){
 		prjMapper.updateProduct(vo);
+	}
+	
+	public void deleteProduct(PrjVO vo){
+		prjMapper.deleteProduct(vo);
 	}
 }
