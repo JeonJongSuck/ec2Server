@@ -35,13 +35,7 @@ public class DefaultController {
 		ModelAndView mv = new ModelAndView("jsonView");
 		
 		mv.addObject("data", productService.viewAll(vo));
-		ObjectMapper om = new ObjectMapper();
-		try {
-			System.out.println(om.writeValueAsString(vo));
-			System.out.println(om.writeValueAsString(productService.viewAll(vo)));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+
 		return mv;
 	}
 	

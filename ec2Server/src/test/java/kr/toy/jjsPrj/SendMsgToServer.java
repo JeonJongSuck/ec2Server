@@ -39,41 +39,25 @@ public class SendMsgToServer {
 	private ObjectMapper om = new ObjectMapper();
 
 	public SendMsgToServer() {
-		post();
+		ProductVO vo = new ProductVO();
+//		vo.setbName("asdaf");
+//		vo.setDescription("dasdfa");
+//		vo.setDistributeCompany("zxcvds");
+//		vo.setMakeCompany("eqwds");
+//		vo.setName("dddd");
+//		vo.setPrice(1231245123);
+		vo.setValidAppKey("AAAAAAAAAA");
+		vo.setValidName("nameA");
+		
+		post(vo);
 	}
 	
 	public static void main(String[] args) {
 		new SendMsgToServer();
 	}
 	
-	// GET method로 selectAll 호출
-	private void get() {
-		try {
-			conn = (HttpsURLConnection)(new URL(ipAddr + "selectAll").openConnection());
-			conn.setDoOutput(true);
-			conn.setRequestMethod("GET");
-//			conn.setRequestProperty("Content-Type", "application/json");
-			conn.setRequestProperty("Accept-Charset", "UTF-8");
-			
-//			OutputStream os = conn.getOutputStream();
-//			VO vo = new VO("a","name","description","makeCompany","distributeCompany",10);
-//			os.write(vo.toString().getBytes("UTF-8"));
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-			String inputLine = null;
-			StringBuffer outResult = new StringBuffer();
-			while((inputLine = in.readLine()) != null)
-				outResult.append(inputLine);
-			System.out.println(outResult.toString());
-			System.out.println(conn.getResponseCode());
-			System.out.println(conn.getResponseMessage());
-			conn.disconnect();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	// POST method로 다른 것들 호출
-	private void post() {
+	private void post(ProductVO vo) {
 		try {
 			conn = (HttpsURLConnection)(new URL(rAddr).openConnection());
 
@@ -83,15 +67,6 @@ public class SendMsgToServer {
 			conn.setRequestProperty("Accept-Charset", "UTF-8");
 
 			OutputStream os = conn.getOutputStream();
-			ProductVO vo = new ProductVO();
-			vo.setbName("asdaf");
-			vo.setDescription("dasdfa");
-			vo.setDistributeCompany("zxcvds");
-			vo.setMakeCompany("eqwds");
-			vo.setName("dddd");
-			vo.setPrice(1231245123);
-			vo.setValidAppKey("AAAAAAAAAA");
-			vo.setValidName("nameA");
 			os.write(om.writeValueAsBytes(vo));
 			os.flush();
 
@@ -118,14 +93,7 @@ public class SendMsgToServer {
 	}
 
 	// 테스트용
-	private void test(){
-		ProductVO vo = new ProductVO();
-		vo.setbName("ccc");
-		vo.setDescription("d");
-		vo.setDistributeCompany("dd");
-		vo.setMakeCompany("ddd");
-		vo.setName("dddd");
-		vo.setPrice(500);
+	private void test(ProductVO vo){
 		ObjectMapper om = new ObjectMapper();
 		try {
 			String str = om.writeValueAsString(vo);
