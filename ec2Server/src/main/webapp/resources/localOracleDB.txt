@@ -1,0 +1,37 @@
+CREATE TABLE product(
+	name varchar2(30),
+	description varchar2(100),
+	price int,
+	makeCompany varchar2(30),
+	distributeCompany varchar2(30),
+	CONSTRAIN pk_product PRIMARY KEY(name)
+);
+CREATE TABLE adminUser(
+	name varchar2(30),
+	permission varchar2(5),
+	CONSTRAINT pk_adminUser PRIMARY KEY(name)
+);
+CREATE TABLE Key(
+	ref varchar2(10) UNIQUE,
+	appKey varchar2(30),
+	CONSTRAINT pk_Key PRIMARY KEY(appKey)
+);
+CREATE TABLE externalUser (
+	name varchar2(30),
+	company varchar2(100),
+	location varchar2(100),
+	ref varchar2(10),
+	CONSTRAINT pk_externalUser PRIMARY KEY(ref),
+	CONSTRAINT fk_externalUser_ref FOREIGN KEY(ref) REFERENCES key(REF) ON DELETE CASCADE
+);
+INSERT INTO product VALUES('pnameA','pdesA', 100,'pmcA', 'pdcA');
+INSERT INTO product VALUES('pnameB','pdesB', 200,'pmcB', 'pdcB');
+INSERT INTO product VALUES('pnameC','pdesC', 300,'pmcC', 'pdcC');
+INSERT INTO adminUser VALUES('JJS', 'CRUDM');
+INSERT INTO adminUser VALUES('SJW', 'CRUD');
+INSERT INTO key VALUES('AAAAAAAAAA', 'AAAAAAAAAA');
+INSERT INTO key VALUES('BBBBBBBBBB', 'BBBBBBBBBB');
+INSERT INTO key VALUES('CCCCCCCCCC', 'CCCCCCCCCC');
+INSERT INTO externalUser VALUES('nameA', 'comA', 'locA', 'AAAAAAAAAA');
+INSERT INTO externalUser VALUES('nameB', 'comB', 'locB', 'BBBBBBBBBB');
+INSERT INTO externalUser VALUES('nameC', 'comC', 'locC', 'CCCCCCCCCC');

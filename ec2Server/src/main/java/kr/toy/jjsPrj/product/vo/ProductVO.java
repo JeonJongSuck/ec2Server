@@ -1,6 +1,11 @@
-package kr.toy.jjsPrj;
+package kr.toy.jjsPrj.product.vo;
 
-public class PrjVO {
+import org.apache.ibatis.type.Alias;
+
+import kr.toy.jjsPrj.valid.vo.ValidVO;
+
+@Alias("productVO")
+public class ProductVO extends ValidVO{
 	private String bName, name, description, makeCompany, distributeCompany;
 	private int price;
 	

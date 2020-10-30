@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-<mapper namespace="kr.toy.jjsPrj.mapper.PrjMapper">
+<mapper namespace="kr.toy.jjsPrj.product.mapper.ProductMapper">
 
 	<!-- 전체 내용 조회 -->
-	<select id="viewAll" resultType="PrjVO">
+	<select id="viewAll" resultType="productVO">
 	  SELECT * FROM product
 	</select>
 	
 	<!-- Insert -->
-	<insert id="insertProdcut" parameterType="PrjVO">
+	<insert id="insertProdcut" parameterType="productVO">
 		INSERT INTO product
 		VALUES(#{name}, #{description}, #{price}, #{makeCompany}, #{distributeCompany})
 	</insert>
 	
 	<!-- Update -->
-	<update id="updateProduct" parameterType="PrjVO">
+	<update id="updateProduct" parameterType="productVO">
 		UPDATE product
 		SET name = #{name}
 		 	, description = #{description}
@@ -25,7 +25,7 @@
 	</update>
 	
 	<!-- Delete-->
-	<delete id="deleteProduct" parameterType="PrjVO">
+	<delete id="deleteProduct" parameterType="productVO">
 		DELETE FROM product
 		WHERE name = #{name}
 	</delete>

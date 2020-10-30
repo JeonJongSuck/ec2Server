@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="kr.toy.jjsPrj.valid.mapper.ValidMapper">
+
+	<!-- 전체 내용 조회 -->
+	<select id="checkKey" parameterType="validVO" resultType="boolean">
+	  SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
+	  FROM externalUser
+	  LEFT JOIN key 
+	  		ON externalUser.ref = key.ref
+	  WHERE key.appKey = #{validAppKey}
+	</select>
+</mapper>

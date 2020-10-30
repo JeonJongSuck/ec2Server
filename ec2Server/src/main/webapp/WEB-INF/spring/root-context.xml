@@ -19,7 +19,8 @@
 	  <property name="dataSource" ref="dataSource" />
 	  <property value="classpath:mybatis-config.xml" name="configLocation" />
 	  <property value="classpath:/mapper/*Mapper.xml" name="mapperLocations" />
+	  <!-- property name="typeAliasesPackage" value="kr.toye.jjsPrj.**.vo"></property-->
 	</bean>
 
-	<mybatis-spring:scan base-package="kr.toy.jjsPrj.mapper" />
+	<mybatis-spring:scan base-package="kr.toy.jjsPrj.*.mapper" />
 </beans>

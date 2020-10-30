@@ -12,62 +12,73 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.toy.jjsPrj.product.vo.ProductVO;
+
 /**
  * Handles requests for the application home page.
  */
 
-@RequestMapping(value = "js/rest")
+@RequestMapping(value = "/rest", method = RequestMethod.POST)
 @Controller
-public class HomeController {
+public class DefaultController {
 	
 	@Resource
-	private PrjService prjService;
+	private ProductService productService;
 	
-	@RequestMapping(value = "/selectAll", method = RequestMethod.GET)
-	public ModelAndView selectALl(Model model) {
+	@RequestMapping(value = "/selectAll")
+	public ModelAndView selectALl(@RequestBody ProductVO vo) {
 		System.out.println("/selectAll called");
 		
 		ModelAndView mv = new ModelAndView("jsonView");
 		
-		mv.addObject("data", prjService.viewAll());
-		
+		mv.addObject("data", productService.viewAll(vo));
+		ObjectMapper om = new ObjectMapper();
+		try {
+			System.out.println(om.writeValueAsString(vo));
+			System.out.println(om.writeValueAsString(productService.viewAll(vo)));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		return mv;
 	}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ModelAndView insert(@RequestBody PrjVO vo, Model model) {
+	@RequestMapping(value = "/insert")
+	public ModelAndView insert(@RequestBody ProductVO vo, Model model) {
 		System.out.println("/insert called");
 
 		ModelAndView mv = new ModelAndView("jsonView");
 		
-		prjService.insertProdcut(vo);
+		productService.insertProdcut(vo);
 
 		return mv;
 	}
 	
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView update(@RequestBody PrjVO vo, Model model) {
+	@RequestMapping(value = "/update")
+	public ModelAndView update(@RequestBody ProductVO vo, Model model) {
 		System.out.println("/update called");
 
 		ModelAndView mv = new ModelAndView("jsonView");
 		
-		prjService.updateProduct(vo);
+		productService.updateProduct(vo);
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public ModelAndView delete(@RequestBody PrjVO vo, Model model) {
+	@RequestMapping(value = "/delete")
+	public ModelAndView delete(@RequestBody ProductVO vo, Model model) {
 		System.out.println("/delete called");
 
 		ModelAndView mv = new ModelAndView("jsonView");
 		
-		prjService.deleteProduct(vo);
+		productService.deleteProduct(vo);
 		
 		return mv;
 	}
 
-	@RequestMapping(value = "/csrf-token", method = RequestMethod.GET)
+	@RequestMapping(value = "/csrf-token")
 	public @ResponseBody String getCsrfToken(HttpServletRequest request) {
 		CsrfToken token = (CsrfToken)request.getAttribute(CsrfToken.class.getName());
 		System.out.println(CsrfToken.class.getName());

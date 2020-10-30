@@ -3,6 +3,7 @@
 <configuration>
 	<!-- 참조 : https://mybatis.org/mybatis-3/ko/sqlmap-xml.html -->
 	<typeAliases>
-		<typeAlias type="kr.toy.jjsPrj.PrjVO" alias="prjVO" />
+		<!-- typeAlias type="kr.toy.jjsPrj.PrjVO" alias="prjVO" /-->
+		<package name="kr.toy.jjsPrj" />
 	</typeAliases>
 </configuration>

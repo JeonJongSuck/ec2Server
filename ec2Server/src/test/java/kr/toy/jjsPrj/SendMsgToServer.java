@@ -11,6 +11,8 @@ import javax.net.ssl.HttpsURLConnection;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.toy.jjsPrj.product.vo.ProductVO;
+
 // 따로 테스트 프레임워크 사용하지 않고 static main구문으로 돌림.
 public class SendMsgToServer {
 	static {
@@ -18,7 +20,6 @@ public class SendMsgToServer {
 	    // https://doomphantom.wordpress.com/2014/05/03/java-security-cert-certificateexception-no-name-matching-localhost-found/
 	    javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
 	    new javax.net.ssl.HostnameVerifier(){
- 
 	        public boolean verify(String hostname,
 	                javax.net.ssl.SSLSession sslSession) {
 	            if (hostname.equals("ec2-3-129-69-97.us-east-2.compute.amazonaws.com")) {
@@ -30,8 +31,9 @@ public class SendMsgToServer {
 		System.setProperty("javax.net.ssl.trustStore", "C:/Temp/keystore/jssecacerts");
 	}
 	
-	private static String ipAddr = "https://ec2-3-129-69-97.us-east-2.compute.amazonaws.com/js/js/rest/";
-	private static String methodNm = "delete";
+//	private static String ipAddr = "https://ec2-3-129-69-97.us-east-2.compute.amazonaws.com/js/js/rest/";
+	private static String ipAddr = "https://localhost/js/rest/";
+	private static String methodNm = "selectAll";
 	private static String rAddr = ipAddr  + methodNm;;
 	private HttpsURLConnection conn;
 	private ObjectMapper om = new ObjectMapper();
@@ -81,13 +83,15 @@ public class SendMsgToServer {
 			conn.setRequestProperty("Accept-Charset", "UTF-8");
 
 			OutputStream os = conn.getOutputStream();
-			PrjVO vo = new PrjVO();
+			ProductVO vo = new ProductVO();
 			vo.setbName("asdaf");
 			vo.setDescription("dasdfa");
 			vo.setDistributeCompany("zxcvds");
 			vo.setMakeCompany("eqwds");
 			vo.setName("dddd");
 			vo.setPrice(1231245123);
+			vo.setValidAppKey("AAAAAAAAAA");
+			vo.setValidName("nameA");
 			os.write(om.writeValueAsBytes(vo));
 			os.flush();
 
@@ -96,7 +100,7 @@ public class SendMsgToServer {
 			isr.read(cbuf);
 			System.out.println(conn.getResponseCode());
 			System.out.println(conn.getResponseMessage());
-			
+			System.out.println(cbuf);
 		} catch (IOException e) {
 			e.printStackTrace();
 			InputStreamReader isr = new InputStreamReader(conn.getErrorStream());
@@ -115,7 +119,7 @@ public class SendMsgToServer {
 
 	// 테스트용
 	private void test(){
-		PrjVO vo = new PrjVO();
+		ProductVO vo = new ProductVO();
 		vo.setbName("ccc");
 		vo.setDescription("d");
 		vo.setDistributeCompany("dd");
